@@ -3,7 +3,7 @@ var vidNames = [];
 // 從 JSON 檔案讀取影片名稱列表
 $.getJSON("./vids/vid_names.json", function(data) {
     vidNames = data;
-    
+
     // 隨機選擇一個影片索引
     vidNum = Math.floor(Math.random() * vidNames.length);
 
@@ -71,9 +71,9 @@ $('body').click(() => {
     }else {
         video.pause(); //暂停
     }
-    
+
     playMy = !playMy
-    
+
 })
 
 var moreType = true

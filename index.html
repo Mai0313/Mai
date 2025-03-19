@@ -1,48 +1,133 @@
 <!DOCTYPE html>
-<html lang = "en">
-    <head>
-        <title>Mai</title>
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-        <meta charset="UTF-8">
-        <link href='https://fonts.googleapis.com/css?family=Rajdhani:600' rel='stylesheet' type='text/css'>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-        <link href="./img/icon.ico" rel="shortcut icon">
-        <style>
-            .myList {
-                display: none;
-            }
-            .myTitle {
-                color: #FFF;
-                text-align: center;
-                font-size: 22px;
-                margin-top: 60px;
-                cursor: pointer;
-                font-family: 'Rajdhani', sans-serif;
-            }
-        </style>
-    </head>
-    <body>
-        <iframe src="mp3/silence.mp3" allow="autoplay"  id="audio" style="display:none"></iframe>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mai</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="./img/icon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <div class="nav-container">
+                <div class="logo">Mai</div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#media">Media</a></li>
+                        <li><a href="#connect">Connect</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
 
-        <video id="vid" autoplay loop>
-            <source  id="vidSrc" type="video/mp4">
-        </video>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Mai</h1>
+                <div class="hero-buttons">
+                    <a href="#media" class="btn primary">Explore Media</a>
+                    <a href="#connect" class="btn secondary">Connect</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <canvas id="audioVisualizer"></canvas>
+            </div>
+        </section>
 
-        <span class="center" style="font-size: 84px; font-weight: bold;">Mai</span>
-        <p id="more" class="center myTitle">More</p>
-        <canvas id="audioVisualizer" style="position: absolute; top: 0; left: 0; z-index: -1; opacity: 0.1;"></canvas>
-        <video id="vid" style="position: absolute; top: 0; left: 0; z-index: 1;" autoplay loop>
-            <source id="vidSrc" type="video/mp4">
-        </video>        
-        <div style="background-color: rgba(10, 10, 10, 0.4); width: 120px; height: 30px; margin-top: 100px; text-align: center; font-size: 22px;" class="center myList">
-            <span onclick="prevSong()" style="cursor: pointer; left: 0; position: absolute;"> ◀ </span>
-            <a href="https://steamcommunity.com/profiles/76561198843133201/" target="_blank"><span>Steam</span></a>
-            <span onclick="nextSong();" style="cursor: pointer; right: 0; position: absolute;"> ▶ </span><br>
-            <a href="https://www.faceit.com/en/players/Maiiiiiiii" target="_blank"><span>Faceit</span></a><br>
-            <span style="font-size: 21px; font-weight: bold;">Mai#9999</span><br>
-        </div>
-        <span>♪ </span><span id="vidName"></span>
-        <div id="pixelgrid" style="background-image:url(https://static.wixstatic.com/media/0da768_8b89980121844d37be099f0dbe33e3e3.png); z-index: -1;"></div>
-        <script src=js/scripts.js></script>
-    </body>
+        <!-- Media Section -->
+        <section id="media" class="media-section">
+            <h2>Media Collection</h2>
+            <p>Browse through my favorite music videos</p>
+
+            <div class="media-player">
+                <div class="current-media">
+                    <video id="vid" controls>
+                        <source id="vidSrc" type="video/mp4">
+                    </video>
+                    <div class="media-controls">
+                        <button onclick="prevSong()" class="control-btn"><i class="fas fa-step-backward"></i></button>
+                        <span id="vidName" class="track-name"></span>
+                        <button onclick="nextSong()" class="control-btn"><i class="fas fa-step-forward"></i></button>
+                    </div>
+                </div>
+
+                <div class="playlist">
+                    <h3>Playlist</h3>
+                    <ul id="video-list">
+                        <!-- This will be populated by JavaScript -->
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Connect Section -->
+        <section id="connect" class="connect-section">
+            <h2>Connect With Me</h2>
+            <div class="social-links">
+                <a href="https://steamcommunity.com/profiles/76561198843133201/" target="_blank" class="social-card">
+                    <i class="fab fa-steam"></i>
+                    <span>Steam</span>
+                </a>
+                <a href="https://www.faceit.com/en/players/Maiiiiiiii" target="_blank" class="social-card">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Faceit</span>
+                </a>
+                <div class="social-card">
+                    <i class="fab fa-discord"></i>
+                    <span>Mai#9999</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2023 Mai. All rights reserved.</p>
+            <div class="time" id="clock"></div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/scripts.js"></script>
+    <script>
+        // Add clock function
+        function clock() {
+            var d = new Date();
+            var hours = d.getHours();
+            var minutes = d.getMinutes();
+            if (hours <= 9) hours = "0" + hours;
+            if (minutes <= 9) minutes = "0" + minutes;
+            date_time = hours + ":" + minutes;
+            document.getElementById("clock").innerHTML = date_time;
+            setTimeout(clock, 1000);
+        }
+        clock();
+
+        // Populate video list
+        $.getJSON("./vids/vid_names.json", function(data) {
+            vidNames = data;
+            let videoList = document.getElementById("video-list");
+
+            for (let i = 0; i < vidNames.length; i++) {
+                let listItem = document.createElement("li");
+                listItem.textContent = vidNames[i];
+                listItem.dataset.index = i;
+                listItem.addEventListener("click", function() {
+                    vidNum = parseInt(this.dataset.index);
+                    refresh();
+                });
+                videoList.appendChild(listItem);
+            }
+
+            // Initialize with first video
+            vidNum = 0;
+            refresh();
+        });
+    </script>
+</body>
 </html>

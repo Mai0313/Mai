@@ -1,6 +1,6 @@
 var points = [],
     velocity2 = 5, // velocity squared
-    canvas = 
+    canvas =
 document.getElementById('container'),
   context = canvas.getContext('2d'),
   radius = 5,
@@ -24,7 +24,7 @@ function init() {
       points[i].buddy = points[i-1];
     }
   }
-  
+
   // animate
   animate();
 }
@@ -33,7 +33,7 @@ function createPoint() {
   var point = {}, vx2, vy2;
   point.x = Math.random()*boundaryX;
   point.y = Math.random()*boundaryY;
-  // random vx 
+  // random vx
   point.vx = (Math.floor(Math.random())*2-1)*Math.random();
   vx2 = Math.pow(point.vx, 2);
   // vy^2 = velocity^2 - vx^2
@@ -45,13 +45,13 @@ function createPoint() {
 function resetVelocity(point, axis, dir) {
   var vx, vy;
   if(axis == 'x') {
-    point.vx = dir*Math.random();  
+    point.vx = dir*Math.random();
     vx2 = Math.pow(point.vx, 2);
   // vy^2 = velocity^2 - vx^2
   vy2 = velocity2 - vx2;
   point.vy = Math.sqrt(vy2) * (Math.random()*2-1);
   } else {
-    point.vy = dir*Math.random();  
+    point.vy = dir*Math.random();
     vy2 = Math.pow(point.vy, 2);
   // vy^2 = velocity^2 - vx^2
   vx2 = velocity2 - vy2;
@@ -63,7 +63,7 @@ function drawCircle(x, y) {
   context.beginPath();
   context.arc(x, y, radius, 0, 2 * Math.PI, false);
   context.fillStyle = '#97badc';
-  context.fill();  
+  context.fill();
 }
 
 function drawLine(x1, y1, x2, y2) {
@@ -72,7 +72,7 @@ function drawLine(x1, y1, x2, y2) {
   context.lineTo(x2, y2);
   context.strokeStyle = '#8ab2d8'
   context.stroke();
-}  
+}
 
 function draw() {
   for(var i =0, l=points.length; i<l; i++) {
@@ -92,7 +92,7 @@ function draw() {
       resetVelocity(point, 'y', 1);
     } else if(point.y > boundaryY-radius) {
       resetVelocity(point, 'y', -1);
-    } 
+    }
   }
 }
 
