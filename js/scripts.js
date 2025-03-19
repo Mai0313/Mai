@@ -18,7 +18,7 @@ function refresh() {
 	$("#vidSrc").attr("src", "./vids/" + vidNum + ".mp4");
 	$("#vidName").text(vidNames[vidNum])
 	document.getElementById("vid").volume = 0.3;
-	$("#vid")[0].load("vid");
+	$("#vid")[0].load();
 }
 
 
